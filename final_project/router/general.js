@@ -48,26 +48,26 @@ public_users.get('/isbn/:isbn',function (req, res) {
 public_users.get('/author/:author',function (req, res) {
   //Write your code here
   let author = req.params.author;
-  let keys = object.keys(books);
+  let keys = Object.keys(books);
+
   for (i=1; i<=keys.length; i++){
     if (books[i].author == author){
-      let books_by_author = books[i];
+        return res.send(JSON.stringify(books[i],null,4));
     }
-  }
-  return res.send(JSON.stringify(books_by_author,null,4));
+  };
+  
 });
 
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
   //Write your code here
   let title = req.params.title;
-  let keys = object.keys(books);
+  let keys = Object.keys(books);
   for (i=1; i<=keys.length; i++){
     if (books[i].title == title){
-      let books_by_title = books[i];
+        return res.send(JSON.stringify(books[i],null,4));
     }
   }
-  return res.send(JSON.stringify(books_by_title,null,4));
 });
 //  Get book review
 public_users.get('/review/:isbn',function (req, res) {
