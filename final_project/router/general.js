@@ -34,55 +34,95 @@ public_users.post("/register", (req,res) => {
 // Get the book list available in the shop
 public_users.get('/',function (req, res) {
   //Write your code here
-  let myPromise = new Promise((resolve,reject) => {
-    setTimeout(() => {
-      resolve("Promise resolved")
-    },6000)})
-    myPromise.then((successMessage) => {
-        return res.send(JSON.stringify(books,null,4));
-      })
+  const myPromise = new Promise((resolve,reject) => {
+    try{
+      let data = JSON.stringify(books,null,4);
+      resolve(data);
+    }catch(err){
+      reject(err);
+    }
+  });
+  myPromise.then(
+    (data) => res.send(data);
+    (err) => console.log("Error"
+  );
 });
 
 // Get book details based on ISBN
 public_users.get('/isbn/:isbn',function (req, res) {
-  //Write your code here
-  let isbn = req.params.isbn;
-  return res.send(JSON.stringify(books[isbn],null,4));
+  
+  const myPromise = new Promise((resolve,reject) => {
+    try{
+      let isbn = req.params.isbn;
+      let data = JSON.stringify(books[isbn],null,4);
+      resolve(data);
+    }catch(err){
+      reject(err);
+    }
+  });
+  myPromise.then(
+    (data) => res.send(data);
+    (err) => console.log("Error"
+  );
  });
   
 // Get book details based on author
 public_users.get('/author/:author',function (req, res) {
-  //Write your code here
-  let author = req.params.author;
-  let keys = Object.keys(books);
-
-  for (i=1; i<=keys.length; i++){
-    if (books[i].author == author){
-      let booksbyauthor=[];
-        return res.send(JSON.stringify(books[i],null,4));
+  const myPromise = new Promise((resolve,reject) => {
+    try{
+      let author = req.params.author;
+      let keys = Object.keys(books);
+      for (i=1; i<=keys.length; i++){
+        if (books[i].author == author){
+          return res.send(JSON.stringify(books[i],null,4));
+        }
+      };
+      resolve("success");
+    }catch(err){
+      reject(err);
     }
-  };
-  
+  });
+  myPromise.then(
+    (data) => console.log(data);
+    (err) => console.log("Error"
+  );
 });
 
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
-  //Write your code here
-  let title = req.params.title;
-  let keys = Object.keys(books);
-  for (i=1; i<=keys.length; i++){
-    if (books[i].title == title){
-        return res.send(JSON.stringify(books[i],null,4));
+  const myPromise = new Promise((resolve,reject) => {
+    try{
+      let title = req.params.title;
+      let keys = Object.keys(books);
+      for (i=1; i<=keys.length; i++){
+        if (books[i].title == title){
+          return res.send(JSON.stringify(books[i],null,4));
+        }
+      };
+      resolve("success");
+    }catch(err){
+      reject(err);
     }
-  }
+  });
+  myPromise.then(
+    (data) => console.log(data);
+    (err) => console.log("Error"
+  );
 });
 //  Get book review
 public_users.get('/review/:isbn',function (req, res) {
-  //Write your code here
-  let isbn = req.params.isbn;
-
-  let oldusername = Object.values(books[isbn].reviews);
-  return res.send(JSON.stringify(oldusername,null,4));
+  try{
+      let isbn = req.params.isbn;
+      let data = JSON.stringify(books[isbn].reviews,null,4);
+      resolve(data);
+    }catch(err){
+      reject(err);
+    }
+  });
+  myPromise.then(
+    (data) => res.send(data);
+    (err) => console.log("Error"
+  );
 });
 
 module.exports.general = public_users;
