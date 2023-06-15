@@ -6,7 +6,6 @@ const public_users = express.Router();
 
 
 public_users.post("/register", (req,res) => {
-  //Write your code here
   const username = req.body.username;
   const password = req.body.password;
   const doesExist = (username)=>{
@@ -33,7 +32,6 @@ public_users.post("/register", (req,res) => {
 
 // Get the book list available in the shop
 public_users.get('/',function (req, res) {
-  //Write your code here
   const myPromise = new Promise((resolve,reject) => {
     try{
       let data = JSON.stringify(books,null,4);
@@ -50,7 +48,6 @@ public_users.get('/',function (req, res) {
 
 // Get book details based on ISBN
 public_users.get('/isbn/:isbn',function (req, res) {
-  
   const myPromise = new Promise((resolve,reject) => {
     try{
       let isbn = req.params.isbn;
