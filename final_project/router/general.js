@@ -52,6 +52,7 @@ public_users.get('/author/:author',function (req, res) {
 
   for (i=1; i<=keys.length; i++){
     if (books[i].author == author){
+      let booksbyauthor=[];
         return res.send(JSON.stringify(books[i],null,4));
     }
   };
