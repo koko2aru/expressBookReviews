@@ -34,7 +34,13 @@ public_users.post("/register", (req,res) => {
 // Get the book list available in the shop
 public_users.get('/',function (req, res) {
   //Write your code here
-  return res.send(JSON.stringify(books,null,4));
+  let myPromise = new Promise((resolve,reject) => {
+    setTimeout(() => {
+      resolve("Promise resolved")
+    },6000)})
+    myPromise.then((successMessage) => {
+        return res.send(JSON.stringify(books,null,4));
+      })
 });
 
 // Get book details based on ISBN
@@ -74,8 +80,9 @@ public_users.get('/title/:title',function (req, res) {
 public_users.get('/review/:isbn',function (req, res) {
   //Write your code here
   let isbn = req.params.isbn;
-  let book_reviews = books[isbn].reviews
-  return res.send(JSON.stringify(book_reviews,null,4));
+
+  let oldusername = Object.values(books[isbn].reviews);
+  return res.send(JSON.stringify(oldusername,null,4));
 });
 
 module.exports.general = public_users;
